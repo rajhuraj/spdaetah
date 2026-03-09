@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#2a3312" />
+  <title>SPDA – Soldier Physical Defence Academy, Etah</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --olive: #3d4a1e;
+      --olive-dark: #2a3312;
+      --gold: #c8952a;
+      --gold-light: #e8b84b;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --text: #1a1a1a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; font-size: 15px; }
+    body { font-family: 'Rajdhani', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--olive-dark);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 3px solid var(--gold);
+    }
+    .nav-inner { display: flex; align-items: center; padding: 12px 16px; }
+    .nav-logo { display: flex; align-items: center; gap: 8px; }
+    .nav-logo .star { font-size: 20px; color: var(--gold); }
+    .nav-logo span { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: var(--white); letter-spacing: 1px; }
+    .nav-logo span em { color: var(--gold-light); font-style: normal; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, var(--olive-dark) 0%, var(--olive) 65%, #4a5a20 100%);
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px 18px 56px;
+    }
+    .hero-content { width: 100%; max-width: 420px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--olive-dark);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 30px;
+      margin-bottom: 16px;
+    }
+    .hero h1 { font-family: 'Oswald', sans-serif; font-size: 2.35rem; color: var(--white); line-height: 1.1; text-transform: uppercase; letter-spacing: 1px; }
+    .hero h1 span { color: var(--gold-light); display: block; font-size: 2.55rem; }
+    .hero-sub { margin-top: 12px; color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.65; }
+
+    .hero-btns { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 15px 18px; border-radius: 12px; font-weight: 700; font-size: 1rem;
+      text-decoration: none; border: none; font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.5px; cursor: pointer; min-height: 52px; touch-action: manipulation;
+    }
+    .btn-gold { background: var(--gold); color: var(--olive-dark); }
+    .btn-gold:active { background: var(--gold-light); transform: scale(0.98); }
+    .btn-outline { background: rgba(255,255,255,0.09); border: 2px solid rgba(255,255,255,0.45); color: var(--white); }
+    .btn-outline:active { background: rgba(255,255,255,0.18); transform: scale(0.98); }
+
+    .hero-stats { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .stat { background: rgba(255,255,255,0.07); border-radius: 10px; padding: 12px 6px; border: 1px solid rgba(200,149,42,0.2); }
+    .stat-num { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--gold-light); font-weight: 700; line-height: 1; }
+    .stat-label { color: rgba(255,255,255,0.6); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 40px 16px; }
+    .section-tag {
+      display: inline-block; background: var(--gold); color: var(--olive-dark);
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 30px; margin-bottom: 8px;
+    }
+    .section-title { font-family: 'Oswald', sans-serif; font-size: 1.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--olive-dark); line-height: 1.2; }
+    .section-title span { color: var(--gold); }
+    .section-line { width: 44px; height: 4px; background: var(--gold); margin: 10px 0 18px; border-radius: 2px; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-img-wrap { position: relative; margin-bottom: 32px; }
+    .about-img-placeholder {
+      background: linear-gradient(135deg, var(--olive), var(--olive-dark));
+      border-radius: 12px; aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; border: 3px solid var(--gold); overflow: hidden;
+    }
+    .about-img-placeholder img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .about-badge {
+      position: absolute; bottom: -14px; right: 10px;
+      background: var(--gold); color: var(--olive-dark);
+      padding: 10px 14px; border-radius: 10px; text-align: center;
+      font-weight: 700; font-size: 0.78rem; line-height: 1.3;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    }
+    .about-badge strong { display: block; font-family: 'Oswald', sans-serif; font-size: 1.25rem; }
+    .about-text p { color: #444; font-size: 0.97rem; line-height: 1.7; margin-bottom: 10px; }
+    .feature-list { list-style: none; margin-top: 14px; }
+    .feature-list li {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 0; font-size: 0.95rem; font-weight: 600;
+      color: var(--olive-dark); border-bottom: 1px solid rgba(61,74,30,0.08); min-height: 44px;
+    }
+    .feature-list li::before { content: '★'; color: var(--gold); flex-shrink: 0; font-size: 0.85rem; }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--olive-dark); padding: 40px 16px; }
+    #gallery .section-title { color: var(--white); }
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; transition: opacity 0.38s ease; }
+    .gallery-card { background: rgba(255,255,255,0.06); border: 2px solid rgba(200,149,42,0.3); border-radius: 10px; overflow: hidden; }
+    .gallery-card:active { border-color: var(--gold); }
+    .gallery-card .photo { background: rgba(255,255,255,0.04); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 2.6rem; overflow: hidden; }
+    .gallery-card .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-card .info { padding: 9px 11px 12px; }
+    .gallery-card .info .name { font-family: 'Oswald', sans-serif; color: var(--gold-light); font-size: 0.92rem; text-transform: uppercase; }
+    .gallery-card .info .detail { color: rgba(255,255,255,0.55); font-size: 0.75rem; margin-top: 2px; }
+    .gallery-card .info .badge {
+      display: inline-block; background: var(--gold); color: var(--olive-dark);
+      font-size: 0.62rem; font-weight: 700; padding: 3px 8px; border-radius: 20px; margin-top: 6px; text-transform: uppercase;
+    }
+    .view-all-wrap { text-align: center; margin-top: 24px; }
+    .view-all-wrap .btn { display: inline-flex; padding: 14px 28px; }
+
+    /* ── HOSTEL ── */
+    #hostel { background: var(--white); }
+    .hostel-text p { color: #444; font-size: 0.97rem; line-height: 1.7; margin-bottom: 10px; }
+    .hostel-features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .hostel-feature { background: var(--cream); border-radius: 10px; padding: 14px 10px; text-align: center; border: 1px solid rgba(61,74,30,0.1); }
+    .hostel-feature .icon { font-size: 1.7rem; }
+    .hostel-feature p { font-size: 0.82rem; font-weight: 600; color: var(--olive-dark); margin-top: 5px; }
+    .hostel-btn { margin-top: 20px; width: 100%; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--olive-dark); padding: 40px 16px; }
+    #contact .section-title { color: var(--white); }
+    .contact-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(200,149,42,0.22); border-radius: 12px; padding: 18px 14px; margin-bottom: 14px; }
+    .contact-card:last-child { margin-bottom: 0; }
+    .contact-card h3 { font-family: 'Oswald', sans-serif; color: var(--gold-light); font-size: 1rem; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 12px; padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07); text-decoration: none;
+      color: rgba(255,255,255,0.88); font-size: 0.95rem; min-height: 52px; touch-action: manipulation;
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-item:active { color: var(--gold-light); }
+    .contact-item .ci { font-size: 1.4rem; width: 28px; flex-shrink: 0; }
+    .contact-item strong { display: block; font-size: 0.95rem; line-height: 1.2; }
+    .contact-item small { color: rgba(255,255,255,0.48); font-size: 0.78rem; }
+
+    .social-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 4px; }
+    .social-btn {
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(200,149,42,0.2);
+      border-radius: 10px; padding: 12px 10px; text-decoration: none;
+      color: rgba(255,255,255,0.82); font-size: 0.88rem; font-weight: 600;
+      min-height: 48px; touch-action: manipulation;
+    }
+    .social-btn:active { background: rgba(200,149,42,0.18); color: var(--gold-light); border-color: var(--gold); }
+    .social-btn .si { font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer { background: #111; text-align: center; padding: 20px 16px 28px; color: rgba(255,255,255,0.38); font-size: 0.8rem; line-height: 1.8; }
+    footer span { color: var(--gold); }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed; bottom: 22px; right: 16px; background: #25D366; color: white;
+      width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 1.7rem; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.55); z-index: 300;
+      animation: pulse 2.5s infinite; touch-action: manipulation;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+      50%      { box-shadow: 0 4px 36px rgba(37,211,102,0.9); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ── DESKTOP ── */
+    @media (min-width: 768px) {
+      html { font-size: 16px; }
+      /* Hero stays vertical, centered column */
+      .hero { padding: 80px 20px; }
+      .hero-content { max-width: 520px; }
+      .hero h1 { font-size: 3.6rem; }
+      .hero h1 span { font-size: 4rem; }
+      .hero-btns { flex-direction: row; justify-content: center; gap: 14px; }
+      .btn { padding: 14px 30px; width: auto; min-height: 50px; }
+      .hero-stats { grid-template-columns: repeat(3, 170px); justify-content: center; gap: 12px; }
+
+      .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; }
+      .about-img-wrap { margin-bottom: 0; }
+
+      /* Gallery: 4 cards on desktop */
+      #gallery { padding: 60px 24px; }
+      .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 16px;
+      }
+
+      /* Hostel: constrain text width on desktop */
+      #hostel { padding: 60px 24px; }
+      .hostel-grid { display: block; max-width: 680px; margin: 0 auto; }
+      .hostel-features { grid-template-columns: repeat(5, 1fr); gap: 12px; }
+      .hostel-feature { padding: 18px 12px; }
+      .hostel-btn { width: auto; display: inline-flex; }
+
+      .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+      .contact-card { margin-bottom: 0; }
+      section { padding: 60px 24px; }
+      #contact { padding: 60px 24px; }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-content { max-width: 560px; }
+      /* Gallery: 6 cards on large screens */
+      .gallery-grid {
+        grid-template-columns: repeat(6, 1fr);
+        max-width: 1200px;
+        gap: 14px;
+      }
+      .hostel-grid { max-width: 760px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="star">⭐</span>
+      <span><em>SPDA</em> Etah</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">🇮🇳 Etah, Uttar Pradesh</div>
+    <h1>
+      Soldier Physical<br/>
+      <span>Defence Academy</span>
+    </h1>
+    <p class="hero-sub">
+      Government exam ke liye physical training, defence career guidance, aur hostel facility — sab ek jagah.
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/919517008876" target="_blank" class="btn btn-gold">💬 WhatsApp Karein</a>
+      <a href="tel:+919517008876" class="btn btn-outline">📞 Call Karein</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Students Selected</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">24+</div>
+        <div class="stat-label">Saal Army Experience</div>
+      </div>
+      <div class="stat" style="min-width:0;">
+        <div class="stat-num" id="academyTimer" style="font-size:1.5rem; line-height:1.2;">...</div>
+        <div class="stat-label">Academy Since 2022</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <div class="about-img-placeholder">
+        <img src="DSC_0183.JPG" alt="Raghuraj Sir - Head Coach & Founder, SPDA">
+      </div>
+      <div class="about-badge">
+        <strong>Raghuraj Sir</strong>
+        Head Coach &amp; Founder
+      </div>
+    </div>
+    <div class="about-text">
+      <span class="section-tag">About Us</span>
+      <h2 class="section-title">Mr. <span>Raghuraj Singh</span></h2>
+      <div class="section-line"></div>
+      <p>
+        <strong>Soldier Physical Defence Academy (SPDA)</strong> Etah, Uttar Pradesh mein sthit hai.
+        Yahan students ko Army, Police, BSF, CRPF jaise government exams ke liye
+        physical ki tayari karwayi jaati hai.
+      </p>
+      <p>
+        <strong>Raghuraj Sir</strong> Indian Army mein 24+ saal seva ke baad ab students ki jindagi badal rahe hain.
+        Unka ek hi lakshya hai — har student ka selection ho.
+      </p>
+      <ul class="feature-list">
+        <li>Army / Navy / Air Force physical training</li>
+        <li>Police &amp; constable physical preparation</li>
+        <li>Running, long jump, chest, height training</li>
+        <li>Personal guidance aur regular practice</li>
+        <li>Hostel mein WiFi — online classes ke liye</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <span class="section-tag">Students Ki Success</span>
+  <h2 class="section-title">Selected <span>Students</span></h2>
+  <div class="section-line" style="background:var(--gold-light);"></div>
+  <div class="gallery-grid" id="rotatingGallery"></div>
+  <div class="view-all-wrap">
+    <a href="selected-students.html" class="btn btn-gold">🏅 Sabhi Selected Students Dekhein →</a>
+  </div>
+</section>
+
+<!-- HOSTEL -->
+<section id="hostel">
+  <div class="hostel-grid">
+    <div class="hostel-text">
+      <span class="section-tag">Hostel Facility</span>
+      <h2 class="section-title">SPDA <span>Hostel</span></h2>
+      <div class="section-line"></div>
+      <p>
+        Jo students Etah se door rehte hain, unke liye SPDA ka <strong>hostel facility</strong> available hai.
+        Yahan rehke aap academy ke paas rahenge aur training pe poora dhyan de sakenge.
+      </p>
+      <p>Safe aur comfortable environment — focused students ke liye ideal jagah.</p>
+      <div class="hostel-features">
+        <div class="hostel-feature"><div class="icon">🛏️</div><p>Clean Rooms</p></div>
+        <div class="hostel-feature"><div class="icon">🍽️</div><p>Khana Suvidha</p></div>
+        <div class="hostel-feature"><div class="icon">🔒</div><p>Safe &amp; Secure</p></div>
+        <div class="hostel-feature"><div class="icon">📶</div><p>WiFi Available</p></div>
+        <div class="hostel-feature"><div class="icon">📍</div><p>Academy Ke Paas</p></div>
+      </div>
+      <a href="https://wa.me/919517008876?text=Hostel%20ke%20baare%20mein%20jaankari%20chahiye"
+         class="btn btn-gold hostel-btn" target="_blank">
+        💬 Hostel Info WhatsApp Pe
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-tag">Contact</span>
+  <h2 class="section-title">Humse <span>Sampark</span> Karein</h2>
+  <div class="section-line" style="background:var(--gold);"></div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>📞 Direct Contact</h3>
+      <a href="https://wa.me/919517008876" target="_blank" class="contact-item">
+        <span class="ci">💬</span>
+        <div><strong>WhatsApp</strong><small>+91 9517008876</small></div>
+      </a>
+      <a href="tel:+919517008876" class="contact-item">
+        <span class="ci">📞</span>
+        <div><strong>Phone Call</strong><small>+91 9517008876</small></div>
+      </a>
+      <a href="https://goo.gl/maps/CSW49h9dVqMKCQdJ7" target="_blank" class="contact-item">
+        <span class="ci">🗺️</span>
+        <div><strong>Google Maps Par Dekhein</strong><small>Academy location map par dekho</small></div>
+      </a>
+    </div>
+    <div class="contact-card">
+      <h3>🌐 Social Media</h3>
+      <div class="social-links-grid">
+        <a href="https://www.youtube.com/@soldierphysicaldefenceacademy" target="_blank" class="social-btn"><span class="si">▶️</span> YouTube 1</a>
+        <a href="https://www.youtube.com/@spda-etah" target="_blank" class="social-btn"><span class="si">📺</span> YouTube 2</a>
+        <a href="https://www.instagram.com/soldierphysicaldefenseacademy" target="_blank" class="social-btn"><span class="si">📸</span> Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=100085891034078" target="_blank" class="social-btn"><span class="si">📘</span> Facebook</a>
+        <a href="https://www.threads.com/@soldierphysicaldefenseacademy" target="_blank" class="social-btn"><span class="si">🧵</span> Threads</a>
+        <a href="https://x.com/Spdaraghurajsir" target="_blank" class="social-btn"><span class="si">🐦</span> Twitter / X</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2022 <span>Soldier Physical Defence Academy (SPDA)</span></p>
+  <p>Etah, Uttar Pradesh – 207001 | 📞 9517008876</p>
+  <p style="margin-top:6px;">🇮🇳 Jai Hind — Har Student Ka Selection Ho</p>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/919517008876" target="_blank" class="wa-float" title="WhatsApp">💬</a>
+
+<script src="students-data.js"></script>
+<script>
+  // Shuffle helper
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // Use ALL_STUDENTS from students-data.js, shuffled
+  let students = shuffle(ALL_STUDENTS);
+
+  let idx = 0;
+  const grid = document.getElementById('rotatingGallery');
+
+  function getVisibleCount() {
+    if (window.innerWidth >= 1024) return 6;
+    if (window.innerWidth >= 768)  return 4;
+    return 2;
+  }
+
+  function renderCards() {
+    const count = getVisibleCount();
+    // set grid columns to match count
+    grid.style.gridTemplateColumns = `repeat(${count}, 1fr)`;
+    grid.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const s = students[(idx + i) % students.length];
+      const card = document.createElement('div');
+      card.className = 'gallery-card';
+      card.style.animation = 'fadeIn 0.45s ease both';
+      card.innerHTML = `
+        <div class="photo">${s.photo ? `<img src="${s.photo}" alt="${s.name}" loading="lazy">` : s.icon}</div>
+        <div class="info">
+          <div class="name">${s.name}</div>
+          <div class="detail">${s.district || s.detail}</div>
+          <span class="badge">${s.post || s.badge}</span>
+        </div>`;
+      grid.appendChild(card);
+    }
+  }
+
+  function rotate() {
+    grid.style.transition = 'opacity 0.3s, transform 0.3s';
+    grid.style.opacity = '0';
+    grid.style.transform = 'translateY(-12px)';
+    setTimeout(() => {
+      idx = (idx + getVisibleCount()) % students.length;
+      renderCards();
+      grid.style.transition = 'none';
+      grid.style.transform = 'translateY(12px)';
+      grid.style.opacity = '0';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        grid.style.transition = 'opacity 0.4s, transform 0.4s';
+        grid.style.opacity = '1';
+        grid.style.transform = 'translateY(0)';
+      }));
+    }, 300);
+  }
+
+  renderCards();
+  let timer = setInterval(rotate, 5000);
+
+  // Re-render on resize (e.g. rotating phone or resizing window)
+  window.addEventListener('resize', () => {
+    clearInterval(timer);
+    renderCards();
+    timer = setInterval(rotate, 5000);
+  });
+
+  // ── ACADEMY TIMER — years+ auto-increasing ──
+  function updateTimer() {
+    const start = new Date('2022-01-01T00:00:00');
+    const now = new Date();
+    let years = now.getFullYear() - start.getFullYear();
+    if (now.getMonth() < start.getMonth() || (now.getMonth() === start.getMonth() && now.getDate() < start.getDate())) years--;
+    document.getElementById('academyTimer').textContent = years + '+';
+  }
+  updateTimer();
+  setInterval(updateTimer, 60000);
+</script>
