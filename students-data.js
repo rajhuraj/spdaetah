@@ -33,7 +33,7 @@ const ALL_STUDENTS = [
   { name: "Jhelum", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Jhelum.jpg", icon: "🎖️" },
   { name: "Harinder", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Harinder.jpg", icon: "🎖️" },
   { name: "Sapna", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Sapna.jpg", icon: "🎖️" },
-  { name: "Sunny", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Sunny.jng", icon: "🎖️" },
+  { name: "Sunny", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Sunny.jpg", icon: "🎖️" },
   { name: "Sakshi", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Sakshi.jpg", icon: "🎖️" },
   { name: "Honey", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Honey.jpg", icon: "🎖️" },
   { name: "Deepti", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Deepti.jpg", icon: "🎖️" },
@@ -55,6 +55,6 @@ const ALL_STUDENTS = [
   { name: "Sonu", village: null,      district: "Kasganj, UP",       post: "UP police",    year: "2026", photo: "batch1/Sonu.jpg", icon: "🎖️" },
   { name: "Kumari Anshu", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Kumari Anshu.jpg", icon: "🎖️" },
   { name: "Shivam", village: null,      district: "Aligarh, UP",       post: "UP police",    year: "2026", photo: "batch1/Shivam.jpg", icon: "🎖️" },
-  { name: "Ankit Nagla", village: "Nagla",      district: "UP",       post: "UP police",    year: "2026", photo: "batch1/Ankit Nagla.jng", icon: "🎖️" },
+  { name: "Ankit Nagla", village: "Nagla",      district: "UP",       post: "UP police",    year: "2026", photo: "batch1/Ankit Nagla.jpg", icon: "🎖️" },
   { name: "Sandeep", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Sandeep.jpg", icon: "🎖️" },
 ];
