@@ -55,6 +55,6 @@ const ALL_STUDENTS = [
   { name: "Sonu", village: null,      district: "Kasganj, UP",       post: "UP police",    year: "2026", photo: "batch1/Sonu.jpg", icon: "🎖️" },
   { name: "Kumari Anshu", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Kumari Anshu.jpg", icon: "🎖️" },
   { name: "Shivam", village: null,      district: "Aligarh, UP",       post: "UP police",    year: "2026", photo: "batch1/Shivam.jpg", icon: "🎖️" },
-  { name: "Ankit Nagla", village: "Nagla",      district: "UP",       post: "UP police",    year: "2026", photo: "batch1/Ankit Nagla.jpg", icon: "🎖️" },
+  { name: "Ankit Nagla", village: "Nagla",      district: "Nagla, UP",       post: "UP police",    year: "2026", photo: "batch1/Ankit Nagla.jpg", icon: "🎖️" },
   { name: "Sandeep", village: "Etah",      district: "Etah, UP",       post: "UP police",    year: "2026", photo: "batch1/Sandeep.jpg", icon: "🎖️" },
 ];
