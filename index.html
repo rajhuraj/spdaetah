@@ -5,9 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#2a3312" />
   <title>SPDA – Soldier Physical Defence Academy, Etah</title>
+  <meta name="description" content="Etah, Uttar Pradesh mein Army, Police, BSF aur CRPF jaise government exams ke liye physical training academy. 24+ saal ke army experience wale Raghuraj Sir ke saath training karein — 500+ students already selected." />
+
+  <!-- Social share preview (Instagram / WhatsApp / Facebook) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SPDA – Soldier Physical Defence Academy, Etah" />
+  <meta property="og:description" content="Government exam ke liye physical training, defence career guidance, aur hostel facility — sab ek jagah. 500+ students selected." />
+  <meta property="og:image" content="soldier physical defence academy.png" />
+  <meta property="og:locale" content="hi_IN" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SPDA – Soldier Physical Defence Academy, Etah" />
+  <meta name="twitter:description" content="Government exam ke liye physical training, defence career guidance, aur hostel facility — sab ek jagah." />
+  <meta name="twitter:image" content="soldier physical defence academy.png" />
+
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="soldier physical defence academy.png" type="image/png" sizes="32x32">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="soldier physical defence academy.png">
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -48,7 +62,17 @@
       justify-content: center;
       text-align: center;
       padding: 48px 18px 56px;
+      position: relative;
+      overflow: hidden;
     }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(135deg, rgba(232,184,75,0.05) 0 2px, transparent 2px 22px);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; }
     .hero-content { width: 100%; max-width: 420px; margin: 0 auto; }
     .hero-badge {
       display: inline-block;
@@ -77,6 +101,19 @@
     .btn-gold:active { background: var(--gold-light); transform: scale(0.98); }
     .btn-outline { background: rgba(255,255,255,0.09); border: 2px solid rgba(255,255,255,0.45); color: var(--white); }
     .btn-outline:active { background: rgba(255,255,255,0.18); transform: scale(0.98); }
+
+    /* Desktop hover + keyboard focus (mouse/keyboard users, not touch) */
+    @media (hover: hover) {
+      .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+      .btn-outline:hover { background: rgba(255,255,255,0.16); border-color: var(--gold); }
+      .social-btn:hover { background: rgba(200,149,42,0.18); color: var(--gold-light); border-color: var(--gold); }
+      .gallery-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+      .contact-item:hover { color: var(--gold-light); }
+    }
+    a:focus-visible, button:focus-visible, .chip:focus-visible {
+      outline: 2px solid var(--gold-light);
+      outline-offset: 2px;
+    }
 
     .hero-stats { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
     .stat { background: rgba(255,255,255,0.07); border-radius: 10px; padding: 12px 6px; border: 1px solid rgba(200,149,42,0.2); }
@@ -197,6 +234,17 @@
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .wa-float { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    }
+
     /* ── DESKTOP ── */
     @media (min-width: 768px) {
       html { font-size: 16px; }
@@ -292,7 +340,7 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="reveal">
   <div class="about-grid">
     <div class="about-img-wrap">
       <div class="about-img-placeholder">
@@ -328,7 +376,7 @@
 </section>
 
 <!-- GALLERY -->
-<section id="gallery">
+<section id="gallery" class="reveal">
   <span class="section-tag">Students Ki Success</span>
   <h2 class="section-title">Selected <span>Students</span></h2>
   <div class="section-line" style="background:var(--gold-light);"></div>
@@ -339,7 +387,7 @@
 </section>
 
 <!-- HOSTEL -->
-<section id="hostel">
+<section id="hostel" class="reveal">
   <div class="hostel-grid">
     <div class="hostel-text">
       <span class="section-tag">Hostel Facility</span>
@@ -366,7 +414,7 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="reveal">
   <span class="section-tag">Contact</span>
   <h2 class="section-title">Humse <span>Sampark</span> Karein</h2>
   <div class="section-line" style="background:var(--gold);"></div>
@@ -493,4 +541,20 @@
   }
   updateTimer();
   setInterval(updateTimer, 60000);
+
+  // ── SCROLL REVEAL ──
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
 </script>
