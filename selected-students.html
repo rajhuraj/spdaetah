@@ -4,9 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Selected Students – SPDA Etah</title>
+  <meta name="description" content="SPDA Etah ke 500+ selected students ki list — Army, Police, BSF, CRPF aur Air Force mein select hue students." />
+  <meta name="theme-color" content="#2a3312" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Selected Students – SPDA Etah" />
+  <meta property="og:description" content="In students ne SPDA se training lekar apna sapna poora kiya." />
+  <meta property="og:image" content="soldier physical defence academy.png" />
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="soldier physical defence academy.png" type="image/png" sizes="32x32">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="soldier physical defence academy.png">
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -44,7 +51,6 @@
       font-family: 'Rajdhani', sans-serif;
       white-space: nowrap;
     }
-    .back-btn:hover { background: rgba(200,149,42,0.3); }
     .header-title {
       font-family: 'Oswald', sans-serif;
       font-size: 1.3rem;
@@ -136,10 +142,17 @@
       transition: all 0.2s;
       font-family: 'Rajdhani', sans-serif;
     }
-    .chip.active, .chip:hover {
-      background: var(--gold);
-      color: var(--olive-dark);
-      border-color: var(--gold);
+    .chip.active { background: var(--gold); color: var(--olive-dark); border-color: var(--gold); }
+    @media (hover: hover) {
+      .chip:hover { background: var(--gold); color: var(--olive-dark); border-color: var(--gold); }
+      .back-btn:hover { background: rgba(200,149,42,0.3); }
+    }
+    a:focus-visible, .chip:focus-visible, .search-box:focus-visible {
+      outline: 2px solid var(--gold-light);
+      outline-offset: 2px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
     }
 
     /* ── GRID ── */
@@ -342,15 +355,9 @@
   </div>
 </div>
 
-<!-- FILTER CHIPS -->
+<!-- FILTER CHIPS (auto-generated from actual student data below) -->
 <div class="filter-wrap" id="filterWrap">
-  <div class="chip active" data-filter="all">Sabhi</div>
-  <div class="chip" data-filter="Army">Army</div>
-  <div class="chip" data-filter="UP Police">UP Police</div>
-  <div class="chip" data-filter="BSF">BSF</div>
-  <div class="chip" data-filter="CRPF">CRPF</div>
-  <div class="chip" data-filter="Navy">Navy</div>
-  <div class="chip" data-filter="Air Force">Air Force</div>
+  <div class="chip active" data-filter="all" role="button" tabindex="0">Sabhi</div>
 </div>
 
 <!-- STUDENTS GRID -->
@@ -407,15 +414,35 @@
   let activeFilter = 'all';
   let searchQuery = '';
 
+  // ── BUILD FILTER CHIPS FROM ACTUAL DATA ──
+  // Purane hardcoded chips (Army/BSF/CRPF/...) empty results dikha rahe the
+  // kyunki abhi tak sirf "UP police" wale students add hue hain.
+  // Ye naye students add hote hi (kisi bhi naye post ke saath) apne aap
+  // uska filter chip bhi ban jayega — kabhi khali result nahi dikhega.
+  function buildFilterChips() {
+    const posts = [...new Set(ALL_STUDENTS.map(s => s.post))].sort();
+    const wrap = document.getElementById('filterWrap');
+    posts.forEach(post => {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.dataset.filter = post;
+      chip.textContent = post;
+      chip.setAttribute('role', 'button');
+      chip.setAttribute('tabindex', '0');
+      wrap.appendChild(chip);
+    });
+  }
+  buildFilterChips();
+
   function getFiltered() {
     return ALL_STUDENTS.filter(s => {
       const matchFilter = activeFilter === 'all' || s.post.includes(activeFilter);
-      const q = searchQuery.toLowerCase();
+      const q = searchQuery.toLowerCase().trim();
       const matchSearch = !q ||
         s.name.toLowerCase().includes(q) ||
         s.post.toLowerCase().includes(q) ||
-        s.village.toLowerCase().includes(q) ||
-        s.district.toLowerCase().includes(q);
+        (s.village || '').toLowerCase().includes(q) ||
+        (s.district || '').toLowerCase().includes(q);
       return matchFilter && matchSearch;
     });
   }
@@ -456,13 +483,22 @@
   });
 
   // Filter chips
-  document.getElementById('filterWrap').addEventListener('click', e => {
-    const chip = e.target.closest('.chip');
-    if (!chip) return;
+  function activateChip(chip) {
     document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
     chip.classList.add('active');
     activeFilter = chip.dataset.filter;
     render();
+  }
+  document.getElementById('filterWrap').addEventListener('click', e => {
+    const chip = e.target.closest('.chip');
+    if (chip) activateChip(chip);
+  });
+  document.getElementById('filterWrap').addEventListener('keydown', e => {
+    const chip = e.target.closest('.chip');
+    if (chip && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      activateChip(chip);
+    }
   });
 
   render();
