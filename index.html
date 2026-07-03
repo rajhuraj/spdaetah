@@ -120,26 +120,6 @@
     .stat-num { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--gold-light); font-weight: 700; line-height: 1; }
     .stat-label { color: rgba(255,255,255,0.6); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
 
-    .store-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 22px;
-      background: var(--gold);
-      border: 1.5px solid var(--gold);
-      color: var(--olive-dark);
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 11px 22px;
-      border-radius: 30px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-    }
-    @media (hover: hover) {
-      .store-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
-    }
-
     /* ── SECTIONS ── */
     section { padding: 40px 16px; }
     .section-tag {
@@ -244,6 +224,51 @@
       justify-content: center; font-size: 1.7rem; text-decoration: none;
       box-shadow: 0 4px 20px rgba(37,211,102,0.55); z-index: 300;
       animation: pulse 2.5s infinite; touch-action: manipulation;
+    }
+    .store-float {
+      position: fixed;
+      bottom: 92px;
+      right: 16px;
+      background: var(--gold);
+      color: var(--olive-dark);
+      height: 50px;
+      width: 50px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      z-index: 300;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      touch-action: manipulation;
+      transition: width 0.3s ease, padding 0.3s ease, background 0.2s;
+    }
+    .store-float .icon { font-size: 1.3rem; flex-shrink: 0; }
+    .store-float .label {
+      white-space: nowrap;
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-width 0.3s ease, opacity 0.25s ease;
+    }
+    .store-float.open {
+      width: 178px;
+      padding: 0 16px 0 14px;
+      justify-content: flex-start;
+    }
+    .store-float.open .label {
+      max-width: 140px;
+      opacity: 1;
+    }
+    @media (hover: hover) {
+      .store-float:hover { background: var(--gold-light); }
     }
     @keyframes pulse {
       0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
@@ -356,9 +381,6 @@
         <div class="stat-label">Academy Since 2022</div>
       </div>
     </div>
-    <a href="https://spda-store.vercel.app/" target="_blank" rel="noopener" class="store-cta">
-      🛒 Academy Store
-    </a>
   </div>
 </section>
 
@@ -479,6 +501,18 @@
 </footer>
 
 <!-- WHATSAPP FLOAT -->
+<div
+  class="store-float"
+  id="storeFloat"
+  role="button"
+  tabindex="0"
+  aria-label="Academy Store"
+  onclick="toggleStoreFloat(this)"
+  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleStoreFloat(this);}"
+>
+  <span class="icon">🛒</span>
+  <span class="label">Academy Store</span>
+</div>
 <a href="https://wa.me/919517008876" target="_blank" class="wa-float" title="WhatsApp">💬</a>
 
 <script src="students-data.js"></script>
@@ -564,6 +598,20 @@
   }
   updateTimer();
   setInterval(updateTimer, 60000);
+
+  // ── STORE FLOAT BUTTON ──
+  // Pehla click: slide open karke "Academy Store" text dikhata hai
+  // Dobara click: store website naye tab me khol deta hai
+  function toggleStoreFloat(el) {
+    if (el.classList.contains('open')) {
+      window.open('https://spda-store.vercel.app/', '_blank', 'noopener');
+    } else {
+      el.classList.add('open');
+      clearTimeout(el._collapseTimer);
+      el._collapseTimer = setTimeout(() => el.classList.remove('open'), 4000);
+    }
+  }
+  window.toggleStoreFloat = toggleStoreFloat;
 
   // ── SCROLL REVEAL ──
   const revealEls = document.querySelectorAll('.reveal');
