@@ -120,6 +120,26 @@
     .stat-num { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--gold-light); font-weight: 700; line-height: 1; }
     .stat-label { color: rgba(255,255,255,0.6); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
 
+    .store-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      background: var(--gold);
+      border: 1.5px solid var(--gold);
+      color: var(--olive-dark);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 11px 22px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    @media (hover: hover) {
+      .store-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+    }
+
     /* ── SECTIONS ── */
     section { padding: 40px 16px; }
     .section-tag {
@@ -336,6 +356,9 @@
         <div class="stat-label">Academy Since 2022</div>
       </div>
     </div>
+    <a href="https://spda-store.vercel.app/" target="_blank" rel="noopener" class="store-cta">
+      🛒 Academy Store
+    </a>
   </div>
 </section>
 
