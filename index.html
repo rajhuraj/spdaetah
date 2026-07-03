@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#2a3312" />
   <title>SPDA – Soldier Physical Defence Academy, Etah</title>
-  <meta name="description" content="Etah, Uttar Pradesh mein Army, Police, BSF aur CRPF jaise government exams ke liye physical training academy. 24+ saal ke army experience wale Raghuraj Sir ke saath training karein — 500+ students already selected." />
+  <meta name="description" content="Etah, Uttar Pradesh mein Army, Police, BSF aur CRPF jaise government exams ke liye physical training academy. 24+ saal ke army experience wale Raghuraj Sir ke saath training karein — 1000+ students already selected." />
 
   <!-- Social share preview (Instagram / WhatsApp / Facebook) -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="SPDA – Soldier Physical Defence Academy, Etah" />
-  <meta property="og:description" content="Government exam ke liye physical training, defence career guidance, aur hostel facility — sab ek jagah. 500+ students selected." />
+  <meta property="og:description" content="Government exam ke liye physical training, defence career guidance, aur hostel facility — sab ek jagah. 1000+ students selected." />
   <meta property="og:image" content="soldier physical defence academy.png" />
   <meta property="og:locale" content="hi_IN" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -132,7 +132,7 @@
     .section-line { width: 44px; height: 4px; background: var(--gold); margin: 10px 0 18px; border-radius: 2px; }
 
     /* ── ABOUT ── */
-    #about { background: var(--white); }
+    #about { background: repeating-linear-gradient(135deg, rgba(61,74,30,0.035) 0 2px, transparent 2px 22px), var(--white); }
     .about-img-wrap { position: relative; margin-bottom: 32px; }
     .about-img-placeholder {
       background: linear-gradient(135deg, var(--olive), var(--olive-dark));
@@ -159,7 +159,7 @@
     .feature-list li::before { content: '★'; color: var(--gold); flex-shrink: 0; font-size: 0.85rem; }
 
     /* ── GALLERY ── */
-    #gallery { background: var(--olive-dark); padding: 40px 16px; }
+    #gallery { background: repeating-linear-gradient(135deg, rgba(232,184,75,0.05) 0 2px, transparent 2px 22px), var(--olive-dark); padding: 40px 16px; }
     #gallery .section-title { color: var(--white); }
     .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; transition: opacity 0.38s ease; }
     .gallery-card { background: rgba(255,255,255,0.06); border: 2px solid rgba(200,149,42,0.3); border-radius: 10px; overflow: hidden; }
@@ -177,7 +177,7 @@
     .view-all-wrap .btn { display: inline-flex; padding: 14px 28px; }
 
     /* ── HOSTEL ── */
-    #hostel { background: var(--white); }
+    #hostel { background: repeating-linear-gradient(135deg, rgba(61,74,30,0.035) 0 2px, transparent 2px 22px), var(--white); }
     .hostel-text p { color: #444; font-size: 0.97rem; line-height: 1.7; margin-bottom: 10px; }
     .hostel-features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
     .hostel-feature { background: var(--cream); border-radius: 10px; padding: 14px 10px; text-align: center; border: 1px solid rgba(61,74,30,0.1); }
@@ -186,7 +186,7 @@
     .hostel-btn { margin-top: 20px; width: 100%; }
 
     /* ── CONTACT ── */
-    #contact { background: var(--olive-dark); padding: 40px 16px; }
+    #contact { background: repeating-linear-gradient(135deg, rgba(232,184,75,0.05) 0 2px, transparent 2px 22px), var(--olive-dark); padding: 40px 16px; }
     #contact .section-title { color: var(--white); }
     .contact-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(200,149,42,0.22); border-radius: 12px; padding: 18px 14px; margin-bottom: 14px; }
     .contact-card:last-child { margin-bottom: 0; }
@@ -214,7 +214,7 @@
     .social-btn .si { font-size: 1.1rem; flex-shrink: 0; }
 
     /* ── FOOTER ── */
-    footer { background: #111; text-align: center; padding: 20px 16px 28px; color: rgba(255,255,255,0.38); font-size: 0.8rem; line-height: 1.8; }
+    footer { background: repeating-linear-gradient(135deg, rgba(232,184,75,0.04) 0 2px, transparent 2px 22px), #111; text-align: center; padding: 20px 16px 28px; color: rgba(255,255,255,0.38); font-size: 0.8rem; line-height: 1.8; }
     footer span { color: var(--gold); }
 
     /* ── WHATSAPP FLOAT ── */
@@ -369,11 +369,11 @@
     </div>
     <div class="hero-stats">
       <div class="stat">
-        <div class="stat-num">500+</div>
+        <div class="stat-num" data-count="1000" data-suffix="+">0+</div>
         <div class="stat-label">Students Selected</div>
       </div>
       <div class="stat">
-        <div class="stat-num">24+</div>
+        <div class="stat-num" data-count="24" data-suffix="+">0+</div>
         <div class="stat-label">Saal Army Experience</div>
       </div>
       <div class="stat" style="min-width:0;">
@@ -598,6 +598,45 @@
   }
   updateTimer();
   setInterval(updateTimer, 60000);
+
+  // ── STAT NUMBER COUNT-UP ──
+  // Jab stats screen par aate hain, 0 se target number tak count hoke rukta hai
+  function animateCount(el) {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = target + suffix;
+      return;
+    }
+
+    const duration = 1400;
+    const startTime = performance.now();
+
+    function tick(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+      const current = Math.round(target * eased);
+      el.textContent = current + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const countEls = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window) {
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          countObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    countEls.forEach(el => countObserver.observe(el));
+  } else {
+    countEls.forEach(el => { el.textContent = el.dataset.count + (el.dataset.suffix || ''); });
+  }
 
   // ── STORE FLOAT BUTTON ──
   // Pehla click: slide open karke "Academy Store" text dikhata hai
