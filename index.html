@@ -188,7 +188,7 @@
     /* ── CONTACT ── */
     #contact { background: repeating-linear-gradient(135deg, rgba(232,184,75,0.05) 0 2px, transparent 2px 22px), var(--olive-dark); padding: 40px 16px; }
     #contact .section-title { color: var(--white); }
-    .contact-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(200,149,42,0.22); border-radius: 12px; padding: 18px 14px; margin-bottom: 14px; }
+    .contact-card { background: rgba(15,18,8,0.68); border: 1px solid rgba(200,149,42,0.28); border-radius: 12px; padding: 18px 14px; margin-bottom: 14px; }
     .contact-card:last-child { margin-bottom: 0; }
     .contact-card h3 { font-family: 'Oswald', sans-serif; color: var(--gold-light); font-size: 1rem; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px; }
     .contact-item {
@@ -205,7 +205,7 @@
     .social-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 4px; }
     .social-btn {
       display: flex; align-items: center; gap: 7px;
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(200,149,42,0.2);
+      background: rgba(15,18,8,0.6); border: 1px solid rgba(200,149,42,0.28);
       border-radius: 10px; padding: 12px 10px; text-decoration: none;
       color: rgba(255,255,255,0.82); font-size: 0.88rem; font-weight: 600;
       min-height: 48px; touch-action: manipulation;
@@ -227,30 +227,38 @@
     }
     .store-float {
       position: fixed;
-      bottom: 92px;
+      bottom: 96px;
       right: 16px;
       background: var(--gold);
       color: var(--olive-dark);
-      height: 50px;
-      width: 50px;
+      height: 58px;
+      width: 58px;
       border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       padding: 0;
       overflow: hidden;
       cursor: pointer;
       border: none;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      box-shadow: 0 4px 18px rgba(200,149,42,0.5);
       z-index: 300;
       font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       touch-action: manipulation;
-      transition: width 0.3s ease, padding 0.3s ease, background 0.2s;
+      transition: width 0.3s ease, padding 0.3s ease, background 0.2s, transform 0.15s ease;
     }
-    .store-float .icon { font-size: 1.3rem; flex-shrink: 0; }
+    .store-float .icon {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .store-float .icon svg { width: 100%; height: 100%; }
     .store-float .label {
       white-space: nowrap;
       max-width: 0;
@@ -259,8 +267,8 @@
       transition: max-width 0.3s ease, opacity 0.25s ease;
     }
     .store-float.open {
-      width: 178px;
-      padding: 0 16px 0 14px;
+      width: 190px;
+      padding: 0 18px 0 16px;
       justify-content: flex-start;
     }
     .store-float.open .label {
@@ -268,7 +276,7 @@
       opacity: 1;
     }
     @media (hover: hover) {
-      .store-float:hover { background: var(--gold-light); }
+      .store-float:hover { background: var(--gold-light); transform: translateY(-2px); }
     }
     @keyframes pulse {
       0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
@@ -510,7 +518,13 @@
   onclick="toggleStoreFloat(this)"
   onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleStoreFloat(this);}"
 >
-  <span class="icon">🛒</span>
+  <span class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+  </span>
   <span class="label">Academy Store</span>
 </div>
 <a href="https://wa.me/919517008876" target="_blank" class="wa-float" title="WhatsApp">💬</a>
